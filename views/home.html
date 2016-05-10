@@ -1,0 +1,37 @@
+<div class="container homepage animated fadeIn" ng-controller="homeCtrl as home">
+	<style>
+	.homepage .carousel-caption {
+		background-color: rgba(0,0,0,.5);
+		color: white;
+		font-size: 1.1em;
+		border-radius: 5px;
+	}
+	</style>
+	<div class="row">
+		<div class="col-md-8">
+			<div>
+				<uib-carousel active="home.activeSlide" interval="home.carouselInterval" no-wrap="false">
+				<uib-slide ng-repeat="slide in home.slides track by slide.id" index="slide.id">
+				<img ng-src="{{slide.imageUrl}}" class="img-responsive">
+				<div class="hidden-xs">
+					<p class="carousel-caption">{{slide.text}}</p>
+				</div>
+				</uib-slide>
+				</uib-carousel>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Quick Search</h3>
+				</div>
+				<div class="panel-body">
+					Panel content
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<autoz-info-cube ng-repeat="infoCube in home.infoCubes" details="infoCube"></autoz-info-cube>
+	</div>
+</div>

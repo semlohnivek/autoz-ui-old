@@ -1,0 +1,170 @@
+@import "bootstrap/less/bootstrap.less";
+
+@brand-primary: darken(#B53806, 0%);
+
+@search-primary-color: darken(@brand-primary, 25%);
+
+
+.top-gap {
+	margin-top: 10px;
+}
+
+.fade-on-hover(@newOpacity) {
+	transition: opacity .25s;
+    &:hover {
+      opacity: @newOpacity;
+    }	
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+body {
+	margin: 0;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 15rem;
+}
+
+ .top-nav {
+    padding: 20px 0 20px 0;
+    background-color: white;
+ }
+ .top-nav .info-strip {
+    margin-bottom: 10px;
+ }
+
+ .top-nav .slogan {
+    font-size: 1.3em;
+    font-style: italic;
+    text-align: center;
+ }
+ 
+ .top-nav .social-media-icon {
+    color: #777777;
+    text-decoration: none;
+ }
+
+ .info-cube {
+ 	background-color: orange;
+ 	color: white;
+ 	text-align: center;
+ 	padding: 10px;
+ 	border-top: 3px solid black;
+ 	.top-gap;
+ 	.fade-on-hover(.85);
+ 	.clickable;
+ }
+
+
+ .btn-outline(@color; @bg-color) {
+    
+    color: @color;
+    background-color: @bg-color;
+    border-color: @color;
+    
+    transition: all .2s;
+    
+    &:hover {
+        color: @bg-color;
+        background-color: @color;
+        border-color: @bg-color;
+    }
+    &:active {
+        background-color: lighten(@color, 15%);
+        border-color: darken(@bg-color, 20%);
+        transition: all 0s;
+    }
+ }
+
+
+.search {
+
+    .search-criteria {
+        background-color: @search-primary-color;
+
+        .criteria {
+           color: white;
+        }
+
+        .summary {
+
+            .remove-criteria {
+                color: red;
+                .clickable;
+                &:hover {
+                    color: darken(red, 5%)
+                }
+            }            
+        }
+
+        .search-button {
+            .btn-outline(@search-primary-color, white);
+        }          
+    }
+
+    .results {
+
+        @results-bg-color: @gray-lighter;
+
+        background-color: @results-bg-color;
+
+        .result-panel {
+             @result-color: lighten(#B7C0D0, 20%);
+             background-color: white;
+             margin: 20px 15px 20px 15px;
+             box-shadow: 2px 2px 15px 3px rgba(0,0,0,0.15);
+             .result-title {
+                border-top: 3px solid darken(@results-bg-color, 10%);
+                border-bottom: 1px solid darken(@results-bg-color, 10%);
+                height: 50px;
+                padding: 5px;
+
+                .logo {
+                    float: left;
+                    height: 30px;
+                }
+
+                .title-text {
+                    float: left;
+                    margin-left: 5px;
+                    margin-top: 2px;
+                    .make {
+                        font-size: 1.5em;
+                    }
+                    .model {
+                        font-size: 1.2em;
+                    }
+                    .year {
+                        font-size: 1.2em;
+                        color: gray;
+                    } 
+                }
+             }
+             .result-body {
+                padding: 15px;
+
+                .thumbnail-container {
+                    max-height: 200px; overflow-y: auto;                    
+                }
+             }     
+         }
+
+    }
+
+}
+
+   
+.close-button {
+    .btn-outline(@search-primary-color, white);
+}
+
+
+
+
+
+
+
