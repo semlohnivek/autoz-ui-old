@@ -4,7 +4,8 @@ angular.module('autoz', [
     'ngResource',
     'ui.bootstrap',
     'ui.router',
-    'ui.select'
+    'ui.select',
+    'angularFileUpload'
 ])
 
 .config(function($stateProvider, $urlRouterProvider){
@@ -20,7 +21,11 @@ angular.module('autoz', [
     .state('search', {
       url: "/search",
       templateUrl: "views/search.html"
-    });  	
+    })
+    .state('admin', {
+      url: "/admin",
+      templateUrl: "views/admin.html"
+    });      	
 
 })
 
@@ -28,11 +33,5 @@ angular.module('autoz', [
 
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-
-    //$rootScope.criteria = {};
-
-    // $rootScope.$watch('criteria.make', function(newValue, oldValue) {
-    //    $rootScope.criteria.model = undefined;
-    // });    
 
 }]);

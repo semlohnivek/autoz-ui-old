@@ -1,42 +1,42 @@
 [
    {
-   	  "id": "bmw",
+   	  "key": "bmw",
    	  "displayName": "BMW",
    	  "slogan": "The ultimate driving machine",
         "models": ["1 Series", "3 Series", "5 Series", "M Class", "X3", "X5"]
    },
    {
-   	  "id": "audi",
+   	  "key": "audi",
    	  "displayName": "Audi",
    	  "slogan": "Advancement through technology",
         "models": ["A4","A6","A8"]
    },
    {
-   	  "id": "honda",
+   	  "key": "honda",
    	  "displayName": "Honda",
    	  "slogan": "Technology you can enjoy",
         "models": ["Civic","Accord","CRV"]
    },
    {
-   	  "id": "mercedes",
+   	  "key": "mercedes",
    	  "displayName": "Mercedes Benz",
    	  "slogan": "Engineered to move the human spirit",
         "models": ["C-Class","E-Class","S-Class"]
    },
    {
-   	  "id": "nissan",
+   	  "key": "nissan",
    	  "displayName": "Nissan",
    	  "slogan": "Innovation that excites",
         "models": ["Maxima","Altima","Rogue"]
    }, 
    {
-   	  "id": "porsche",
+   	  "key": "porsche",
    	  "displayName": "Porsche",
    	  "slogan": "There is no substitute",
         "models": ["911","718","Panamera", "Cayenne"]
    },  
    {
-   	  "id": "toyota",
+   	  "key": "toyota",
    	  "displayName": "Toyota",
    	  "slogan": "Let's go places",
         "models": ["Avalon","Camry","Corolla","Prius"]

@@ -32,7 +32,7 @@
 						<ui-select-choices repeat="make in search.makes">
 							<div class="row">
 								<div class="col-xs-2">
-									<img ng-src="img/logos/{{make._id}}_square.png" style="height: 30px;">
+									<img ng-src="img/logos/{{make.shortName}}_square.png" style="height: 30px;">
 								</div>
 								<div class="col-xs-10">
 									<div ng-bind="make.displayName" style="font-size: 1.3em; padding-top: 3px;"></div>
@@ -138,7 +138,7 @@
 						<div ng-show="search.terms.make">
 							<div class="row">
 							<div class="col-xs-2">
-								<img ng-src="img/logos/{{search.terms.make._id}}_square.png" style="height: 20px;">
+								<img ng-src="img/logos/{{search.terms.make.shortName}}_square.png" style="height: 20px;">
 							</div>
 							<div class="col-xs-8">
 								{{search.terms.make.displayName}}
@@ -226,7 +226,7 @@
 				<h3 ng-show="search.results">Found {{search.results.length}} results</h3>
 		    </div>
 		</div>
-		<div class="row animated fadeInUp" ng-repeat="car in search.results" ng-init="car.photoIndex = 0;">
+		<div class="row" ng-repeat="car in search.results" ng-init="car.photoIndex = 0;">
 			<div class="col-md-offset-1 col-md-10 col-xs-12">
 				<div class="result-panel">
 				<div class="result-title">
