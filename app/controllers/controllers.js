@@ -10,7 +10,7 @@ function topNavCtrl() {
 	
 }
 
-function adminCtrl(Makes, Enum, Cars, FileUploader) {
+function adminCtrl(Makes, Enum, Cars, FileUploader, Config) {
 	var vm = this;
 
 	vm.car = {};
@@ -28,17 +28,22 @@ function adminCtrl(Makes, Enum, Cars, FileUploader) {
 	vm.prices = Enum.prices;
 	vm.mileages = Enum.mileages;
 
+	vm.photoRoot = Config.photoRoot;
+
 	function addCarToInventory() {
 		var car = new Cars();
 
         angular.copy(vm.car, car);
 
-        car.make = car.make.displayName;
+        //car.make = car.make.displayName;
 
         car.$save()
            .then(function(response){
            		console.log("SUCCESS");
            		console.log(response);
+           		vm.stockId = response.stockId;
+           		vm.photoUploader.uploadAll();
+           		vm.car = {};
            }, function(err){
            		console.log("FAIL");
            		console.log(err);
@@ -78,7 +83,7 @@ function adminCtrl(Makes, Enum, Cars, FileUploader) {
 	// FILE UPLOADER TESTING
 
         var photoUploader = vm.photoUploader = new FileUploader({
-            url: 'http://webhost2:9001/api/media'
+            url: 'http://webhost2:9001/upload/photos'
         });
 
         // FILTERS
@@ -103,6 +108,7 @@ function adminCtrl(Makes, Enum, Cars, FileUploader) {
             console.info('onAfterAddingAll', addedFileItems);
         };
         photoUploader.onBeforeUploadItem = function(item) {
+            item.formData.push({stockId: vm.stockId});        	
             console.info('onBeforeUploadItem', item);
         };
         photoUploader.onProgressItem = function(fileItem, progress) {
@@ -142,8 +148,12 @@ function adminCtrl(Makes, Enum, Cars, FileUploader) {
 
 }
 
-function homeCtrl() {
+function homeCtrl($state, Makes, Config, Search) {
 	var vm = this;
+
+	vm.photoRoot = Config.photoRoot;
+
+	vm.search = search;
 	
 	vm.carouselInterval = 5000;
 	vm.activeSlide = 0;
@@ -191,15 +201,35 @@ function homeCtrl() {
 	   	  text: 'Our new "Vehicle as a Service" cloud portal means faster response times.'
 	   }	   	   
 	];
+
+	Makes.query().$promise
+	   .then(function(response){
+	   	   vm.makes = response;
+	   	   vm.makes = vm.makes.map(function(make){
+	   	   	delete make._id;
+	   	   	delete make.slogan;
+	   	   	   make.term = JSON.stringify({make:make});
+	   	   	   return make;
+	   	   });
+	   })
+
+    function search(make) {
+    	Search.quickSearch(make.displayName);
+    	$state.go('search');
+    }
 }
 
-function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, SearchTerms, Enum) {
+function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, Search, Enum, Config) {
+
+	if ($state.params.terms) {
+		Search.terms = JSON.parse($state.params.terms);
+	}
 
 	var vm = this;
 
 	vm.makesMap = {};
 	vm.makes = [];
-	vm.terms = SearchTerms.get();
+	vm.terms = Search.terms;
 
     //Hard-code the mileage and price options as they don't really follow a fixed pattern
     vm.mileages = Enum.mileages;
@@ -210,6 +240,12 @@ function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, SearchTe
 	vm.doSearch = doSearch;
 	vm.getMake = getMake;
 	vm.clearSelectedModel = clearSelectedModel;
+
+	vm.options = Search.options;
+
+	vm.photoRoot = Config.photoRoot;
+
+	//vm.doSearch();	
 
     //Get vehicle makes to populate the dropdown list
 	Makes.query(function(response){
@@ -229,9 +265,7 @@ function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, SearchTe
 	}
 
     function doSearch() {
-    	var searchObject = angular.copy(vm.terms, searchObject);
-    	if (searchObject.make) searchObject.make = vm.terms.make.displayName;
-    	vm.results = Cars.search({params: searchObject});
+        vm.results = Search.doSearch();
     }
 
 
@@ -256,17 +290,18 @@ function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, SearchTe
 		vm.terms.model = undefined;
 	}
 
-    //Save the search criteria in the SearchTerms service before
+    //Save the search criteria in the Search service before
     //the controller is destroyed
 	$scope.$on('$destroy', function iVeBeenDismissed() {
-	  SearchTerms.set(vm.terms);
+	  Search.terms = vm.terms;
 	});	
 }
 
-function allPhotosModalCtrl($rootScope, $scope, $uibModalInstance, car) {
+function allPhotosModalCtrl($rootScope, $scope, $uibModalInstance, car, Config) {
 	var vm = this;
 
 	vm.car = car;
+	vm.photoRoot = Config.photoRoot;
 
 	  vm.cancel = function () {
 	    $uibModalInstance.dismiss('cancel');

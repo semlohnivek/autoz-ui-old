@@ -1,0 +1,17 @@
+<div class="form-group col-xs-12 search-option" style="position: relative;">
+	<div class="btn btn-lg search-option-title" ng-class="{'btn-default-outline': !$ctrl.option.selection, 'btn-primary-outline':$ctrl.option.selection }" ng-click="$ctrl.open()">{{$ctrl.option.title}}
+		<br>
+		<div class="search-option-value" ng-show="$ctrl.option.selection">
+
+		  <strong>
+			   <label ng-hide="$ctrl.option.format">{{$ctrl.option.selection}}</label>
+			   <label ng-show="$ctrl.option.format && $ctrl.option.format === 'currency'">{{$ctrl.option.selection | currency:'$':0}}</label>
+		       <label ng-show="$ctrl.option.format && $ctrl.option.format === 'number'">{{$ctrl.option.selection | number:0}}</label>  	
+		  </strong>
+		</div>
+
+	</div>
+	<div ng-show="$ctrl.option.selection" class="clickable" ng-click="$ctrl.clearSelection()" style="position: absolute; top: -5px; right: 10px; padding: 10px;">
+		<span class="fa fa-times fa-lg"></span>
+	</div>
+</div>

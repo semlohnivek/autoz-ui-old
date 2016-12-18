@@ -5,7 +5,8 @@ angular.module('autoz', [
     'ui.bootstrap',
     'ui.router',
     'ui.select',
-    'angularFileUpload'
+    'angularFileUpload',
+    'blockUI'
 ])
 
 .config(function($stateProvider, $urlRouterProvider){
@@ -19,7 +20,7 @@ angular.module('autoz', [
       templateUrl: "views/home.html"
     })
     .state('search', {
-      url: "/search",
+      url: "/search/:terms",
       templateUrl: "views/search.html"
     })
     .state('admin', {

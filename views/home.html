@@ -10,14 +10,14 @@
 	<div class="row">
 		<div class="col-md-8">
 			<div>
-				<uib-carousel active="home.activeSlide" interval="home.carouselInterval" no-wrap="false">
-				<uib-slide ng-repeat="slide in home.slides track by slide.id" index="slide.id">
-				<img ng-src="{{slide.imageUrl}}" class="img-responsive">
-				<div class="hidden-xs">
-					<p class="carousel-caption">{{slide.text}}</p>
+				<div uib-carousel active="home.activeSlide" interval="home.carouselInterval" no-wrap="false">
+					<div uib-slide ng-repeat="slide in home.slides track by slide.id" index="slide.id">
+						<img ng-src="{{slide.imageUrl}}" class="img-responsive">
+						<div class="hidden-xs">
+							<p class="carousel-caption">{{slide.text}}</p>
+						</div>
+					</div>
 				</div>
-				</uib-slide>
-				</uib-carousel>
 			</div>
 		</div>
 		<div class="col-md-4">
@@ -25,8 +25,11 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Quick Search</h3>
 				</div>
-				<div class="panel-body">
-					Panel content
+				<div class="panel-body" style="max-height: 320px; overflow-y: auto;">
+					<div class="col-xs-6 clickable" ng-repeat="make in home.makes" ng-click="home.search(make);" style="text-align: center;">
+						<img ng-src="{{home.photoRoot}}/{{make.logoUrl}}">
+						<!-- <a ui-sref="search({ terms: make.term.toString() })"><img ng-src="{{home.photoRoot}}/{{make.logoUrl}}"></a> -->
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,12 @@
+<div class="results">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<h2 ng-show="!$ctrl.res">No results to display</h2>
+				<h3 ng-show="$ctrl.res"><small>Found {{$ctrl.res.length}} results</small></h3>
+		    </div>
+		</div>
+		<search-results-item ng-repeat="car in $ctrl.res" car="car"></search-results-item>
+
+    </div>
+</div>

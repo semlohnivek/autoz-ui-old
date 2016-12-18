@@ -84,6 +84,19 @@ body {
     
  }
 
+ .search-option {
+
+    .search-option-title {
+        width: 100%;
+
+    }
+    .search-option-value {
+        width: 100%;
+        text-align: center;
+        font-size: 1.3em;
+    }
+ }
+
 
 .search {
 
@@ -112,9 +125,12 @@ body {
 
     .results {
 
-        @results-bg-color: @gray-lighter;
+        @results-bg-color: white;
+
 
         background-color: @results-bg-color;
+        border: 1px solid #d8d8d8;
+        border-radius: 5px;
 
         .result-panel {
              @result-color: lighten(#B7C0D0, 20%);
@@ -149,10 +165,14 @@ body {
                 }
              }
              .result-body {
-                padding: 15px;
+
+                .main-thumbnail {
+                    height: 250px;
+                }
 
                 .thumbnail-container {
-                    max-height: 200px; overflow-y: auto;                    
+                    padding: 5px 0 5px 0;
+                    max-height: 240px; overflow-y: auto;                    
                 }
              }     
          }
@@ -161,6 +181,13 @@ body {
 
 }
 
+.btn-default-outline {
+    .btn-outline(#333, #fff);
+} 
+
+.btn-primary-outline {
+    .btn-outline(@brand-primary, white);
+} 
    
 .close-button {
     .btn-outline(@search-primary-color, white);

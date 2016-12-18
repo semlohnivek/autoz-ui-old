@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="result-panel">
+			<div class="result-title">
+				<!-- <div class="col-md-4"> -->
+					<img ng-src="{{$ctrl.photoRoot}}/{{$ctrl.car._make.logoUrl}}" class="title-item logo">
+					&nbsp;&nbsp;
+					<span class="lead">
+					<span ng-bind="$ctrl.car.year"></span>						
+					<span ng-bind="$ctrl.car._make.displayName"></span>
+					<span ng-bind="$ctrl.car.model"></span>
+					
+				    </span>
+<!-- 					</div> -->
+			</div>
+			<div class="result-body">
+				<div class="row">
+					<div class="col-md-5 clickable" ng-click="search.viewPhotos(car)">
+						<img class="img-responsive main-thumbnail" ng-src="{{$ctrl.photoRoot}}/{{$ctrl.car.photos[$ctrl.photoIndex]}}">
+					</div>
+					<div class="col-md-4">
+						<div class="thumbnail-container">
+						<img ng-src="{{$ctrl.photoRoot}}/{{photo}}" ng-repeat="photo in $ctrl.car.photos track by $index" style="width: 100px; height: 70px; margin: 2px;" ng-mouseover="$ctrl.photoIndex = $index">
+					   </div>
+					</div>
+					<div class="col-md-3">
+						<h2>{{$ctrl.car.price | currency:'$':0}}</h2>
+						<h3>{{$ctrl.car.mileage | number}} <small>miles</small></h3>
+					</div>						
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

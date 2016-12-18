@@ -3,7 +3,7 @@
     <script type="text/ng-template" id="allPhotos.html">
         <div class="modal-header photo-viewer">
         	<div class="pull-left">
-				<img ng-src="img/logos/{{vm.car.make}}_square.png" class="title-item logo" style="height: 60px;">
+				<img ng-src="{{vm.photoRoot}}/{{vm.car._make.logoUrl}}" class="title-item logo" style="height: 60px;">
 				<div>
 				<span ng-bind="vm.car.model" class="title-item model"></span>
 			    </div>        		
@@ -14,252 +14,22 @@
 		    </div>
         </div>
         <div class="modal-body text-center">
-            <img class="img-responsive img-thumbnail" ng-src="img/inventory/{{photo}}" ng-repeat="photo in vm.car.photos track by $index" style="margin-bottom: 5px;">
+            <img class="img-responsive img-thumbnail" ng-src="{{vm.photoRoot}}/{{photo}}" ng-repeat="photo in vm.car.photos" style="margin-bottom: 5px;">
         </div>
     </script>
 
 
-<div class="search-criteria">
-<div class="container">
-		<div class="panel-body">
-			<div class="col-sm-8 criteria">
-				<div class="form-group col-md-6">
-					<label for="exampleInputEmail1">Make</label>
-					<ui-select ng-model="search.terms.make" on-select="search.clearSelectedModel($item, $model)">
-						<ui-select-match>
-							<span ng-bind="$select.selected.displayName"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="make in search.makes">
-							<div class="row">
-								<div class="col-xs-2">
-									<img ng-src="img/logos/{{make.shortName}}_square.png" style="height: 30px;">
-								</div>
-								<div class="col-xs-10">
-									<div ng-bind="make.displayName" style="font-size: 1.3em; padding-top: 3px;"></div>
-								</div>
-							</div>
-						</ui-select-choices>
-					</ui-select>
-				</div>
-				<div class="form-group col-sm-6">
-					<label for="exampleInputPassword1">Model</label>
-					<ui-select ng-model="search.terms.model">
-						<ui-select-match>
-							<span ng-bind="$select.selected"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="model in search.terms.make.models">
-							<div class="row">
-								{{model}}
-							</div>
-						</ui-select-choices>
-					</ui-select>
-				</div>
-				<div class="form-group col-sm-3">
-					<label for="exampleInputPassword1">Min Year</label>
-					<ui-select ng-model="search.terms.minYear">
-						<ui-select-match>
-							<span ng-bind="$select.selected"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="year in search.years">
-							<div class="row">
-								{{year}}
-							</div>
-						</ui-select-choices>
-					</ui-select>
-				</div>
-				<div class="form-group col-sm-3">
-					<label for="exampleInputPassword1">Max Year</label>
-					<ui-select ng-model="search.terms.maxYear">
-						<ui-select-match>
-							<span ng-bind="$select.selected"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="year in search.years">
-							<div class="row">
-								{{year}}
-							</div>
-						</ui-select-choices>
-					</ui-select>
-				</div>				
-				<div class="form-group col-sm-6">
-					<label for="exampleInputPassword1">Max Mileage</label>
-					<ui-select ng-model="search.terms.maxMiles">
-						<ui-select-match>
-							<span ng-bind="$select.selected | number:0"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="mileage in search.mileages">
-							<div class="row">
-								{{mileage | number:0}}
-							</div>
-						</ui-select-choices>
-					</ui-select>
-				</div>
-				<div class="form-group col-sm-3">
-					<label for="exampleInputPassword1">Min Price</label>
-					<ui-select ng-model="search.terms.minPrice">
-						<ui-select-match>
-							<span ng-bind="$select.selected | currency:'$':0"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="price in search.prices">
-							<div class="row">
-								{{price | currency:'$':0}}
-							</div>
-						</ui-select-choices>
-					</ui-select>
-				</div>
-				<div class="form-group col-sm-3">
-					<label for="exampleInputPassword1">Max Price</label>
-					<ui-select ng-model="search.terms.maxPrice">
-						<ui-select-match>
-							<span ng-bind="$select.selected | currency:'$':0"></span>
-						</ui-select-match>
-						<ui-select-choices repeat="price in search.prices">
-							<div class="row">
-								{{price | currency:'$':0}}
-							</div>
-						</ui-select-choices>
-					</ui-select>
-				</div>
-			</div>
-			<div class="col-sm-4 summary">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Search Summary</h3>
-					</div>
-					<div class="panel-body">
-						<div ng-show="!search.terms.make">
-							<div class="row">
-							<div class="col-xs-offset-2 col-xs-8">
-								Any make or model
-							</div>
-							<div class="col-xs-2">
-							</div>
-							</div>
-					    </div>						
-						<div ng-show="search.terms.make">
-							<div class="row">
-							<div class="col-xs-2">
-								<img ng-src="img/logos/{{search.terms.make.shortName}}_square.png" style="height: 20px;">
-							</div>
-							<div class="col-xs-8">
-								{{search.terms.make.displayName}}
-							</div>
-							<div class="col-xs-2">
-								<span class="fa fa-times remove-criteria"  ng-click="search.terms.make = undefined; search.terms.model = undefined;"></span>
-							</div>
-							</div>
-					    </div>
-						<div ng-show="search.terms.model">
-							<div class="row">
-							<div class="col-xs-offset-2 col-xs-8">
-								{{search.terms.model}}
-							</div>
-							<div class="col-xs-2">
-								<span class="fa fa-times remove-criteria"  ng-click="search.terms.model = undefined"></span>
-							</div>
-							</div>
-					    </div>
-						<div ng-show="search.terms.minYear">
-							<div class="row">
-							<div class="col-xs-offset-2 col-xs-8">
-								From at least year {{search.terms.minYear}}
-							</div>
-							<div class="col-xs-2">
-								<span class="fa fa-times remove-criteria"  ng-click="search.terms.minYear = undefined"></span>
-							</div>
-						    </div>
-					    </div>
-					    <div ng-show="search.terms.maxYear">
-					    	<div class="row">
-							<div class="col-xs-offset-2 col-xs-8">
-								Up to year {{search.terms.maxYear}}
-							</div>
-							<div class="col-xs-2">
-								<span class="fa fa-times remove-criteria"  ng-click="search.terms.maxYear = undefined"></span>
-							</div>
-							</div>
-					    </div>
-					    <div ng-show="search.terms.maxMiles">
-					    	<div class="row">
-							<div class="col-xs-offset-2 col-xs-8">
-								Maximum mileage - {{search.terms.maxMiles | number:0}}
-							</div>
-							<div class="col-xs-2">
-								<span class="fa fa-times remove-criteria"  ng-click="search.terms.maxMiles = undefined"></span>
-							</div>
-							</div>
-					    </div>	
-						<div ng-show="search.terms.minPrice">
-							<div class="row">
-							<div class="col-xs-offset-2 col-xs-8">
-								Minimum price - {{search.terms.minPrice | currency:'$':0}}
-							</div>
-							<div class="col-xs-2">
-								<span class="fa fa-times remove-criteria"  ng-click="search.terms.minPrice = undefined"></span>
-							</div>
-							</div>
-					    </div>
-					    <div ng-show="search.terms.maxPrice">
-					    	<div class="row">
-							<div class="col-xs-offset-2 col-xs-8">
-								Maximum price - {{search.terms.maxPrice | currency:'$':0}}
-							</div>
-							<div class="col-xs-2">
-								<span class="fa fa-times remove-criteria"  ng-click="search.terms.maxPrice = undefined"></span>
-							</div>
-							</div>
-					    </div>					    				    
-				    </div>
-				</div>
-			</div>
-			<div class="col-xs-12">
-				<div class="btn search-button pull-right" ng-click="search.doSearch()"><span class="fa fa-search"></span> Search</div>
+		<div class="container">
+		    <div class="col-sm-12 col-md-3">
+		    	<div class="search-criteria">
+		        	<search-term-option ng-repeat="(key, option) in search.options" option="option"></search-term-option>
+			    </div>
+		    </div>
+		    <div class="col-sm-12 col-md-9">
+				<search-results-list results="search.results"></search-results-list>
 			</div>
 		</div>
 
-	</div>
-</div>
-<div class="results">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-offset-1 col-xs-12">
-				<h3 ng-show="!search.results">No results to display</h3>
-				<h3 ng-show="search.results">Found {{search.results.length}} results</h3>
-		    </div>
-		</div>
-		<div class="row" ng-repeat="car in search.results" ng-init="car.photoIndex = 0;">
-			<div class="col-md-offset-1 col-md-10 col-xs-12">
-				<div class="result-panel">
-				<div class="result-title">
-					<!-- <div class="col-md-4"> -->
-						<img ng-src="img/logos/{{car.make}}_square.png" class="title-item logo">
-						<div class="title-text">
-						<span ng-bind="search.getMake(car.make).displayName" class="title-item make"></span> - 
-						<span ng-bind="car.model" class="title-item model"></span> - 
-						<span ng-bind="car.year" class="title-item year"></span>
-					    </div>
-<!-- 					</div> -->
-				</div>
-				<div class="result-body">
-					<div class="row">
-						<div class="col-md-4 clickable" ng-click="search.viewPhotos(car)">
-							<div>
-							<img class="img-responsive thumbnail" ng-src="img/inventory/{{car.photos[car.photoIndex]}}">
-							<span>{{car.photos.length}} photos (click to view all)</span>
-						    </div>
-						</div>
-						<div class="col-md-3">
-							<div class="thumbnail-container">
-							<img ng-src="img/inventory/{{photo}}" ng-repeat="photo in car.photos track by $index" style="max-width: 85px; margin: 2px;" ng-mouseover="car.photoIndex = $index">
-						   </div>
-						</div>
-						<div class="col-md-3">
-							<div class="control-label">Miles: </div>
-						</div>						
-					</div>
-				</div>
-			</div>
-			</div>
-		</div>
-    </div>
-</div>
+
+
 </div>

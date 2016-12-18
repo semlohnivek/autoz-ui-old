@@ -1,0 +1,11 @@
+        <div class="modal-header text-center">
+            <h3 class="modal-title" id="modal-title">{{$ctrl.title}}</h3>
+        </div>
+        <div class="modal-body" id="modal-body" style="max-height: 300px; overflow-y: auto;">
+            <div class="col-xs-offset-1 col-xs-10" ng-repeat="item in $ctrl.items" ng-click="$ctrl.ok(item)">
+                <div class="btn btn-danger" style="width: 100%; margin-top: 5px;">{{$ctrl.formatted(item)}}</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>

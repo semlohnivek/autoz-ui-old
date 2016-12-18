@@ -7,7 +7,7 @@
 
 	<div class="col-md-6">
 
-		<div class="form">
+		<form id="newCarForm" name="newCarForm">
 
 			<div class="form-group">
 			    <label>Make</label>
@@ -18,7 +18,7 @@
 					<ui-select-choices repeat="make in admin.makes">
 						<div class="row">
 							<div class="col-xs-2">
-								<img ng-src="img/logos/{{make.shortName}}_square.png" style="height: 30px;">
+								<img ng-src="{{admin.photoRoot}}/{{make.logoUrl}}" style="height: 30px;">
 							</div>
 							<div class="col-xs-10">
 								<div ng-bind="make.displayName" style="font-size: 1.3em; padding-top: 3px;"></div>
@@ -65,7 +65,11 @@
 			<div class="form-group">
 				<label for="exampleInputPassword1">VIN</label>
 				<input type="text" class="form-control" ng-model="admin.car.vin"></input>
-			</div>			
+			</div>	
+<!-- 			<div class="form-group">
+				<label for="">Photo</label>
+				<input type="file" class="form-control" ng-model="admin.car.photo" multiple="true"></input>
+			</div>	 -->				
 	        
            <div class="btn btn-primary" ng-click="admin.addCarToInventory()"><span class="fa fa-plus"></span> Add Car to Inventory</div>
            <br>
@@ -73,9 +77,9 @@
            <div class="btn btn-default" ng-click="admin.generateCar()"><span class="fa fa-refresh"></span> Generate a Car</div>
            <br>
            <br>
-           <div class="btn btn-default" ng-click="admin.generate25Cars()"><span class="fa fa-refresh"></span> Generate 25 Cars</div>           
+           <div class="btn btn-default" ng-click="admin.generate25Cars()"><span class="fa fa-refresh"></span> Generate 25 Cars</div>
 
-		</div>
+		</form>
 
     </div>
 
@@ -87,14 +91,14 @@
 			</div>	
 			<div class="form-group">
 				<label>Photos</label>
-				<div  nv-file-over="" uploader="admin.photoUploader" style="border: 2px dashed black; padding: 20px;">
+<!-- 				<div  nv-file-over="" uploader="admin.photoUploader" style="border: 2px dashed black; padding: 20px;">
 					<div class="alert alert-info">Drop photos here</div>
 				</div>
 				<br>
 				- OR -
 				<br>
-				<br>
-				<input type="file" nv-file-select="" uploader="admin.photoUploader" multiple  />
+				<br> -->
+				<input type="file" name="carpic" nv-file-select="" uploader="admin.photoUploader" multiple  />
 			</div>				
 		</div>   
 
@@ -128,12 +132,12 @@
                                     <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
                                 </td>
                                 <td nowrap>
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+<!--                                     <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                                         <span class="glyphicon glyphicon-upload"></span> Upload
                                     </button>
                                     <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
                                         <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                                    </button>
+                                    </button> -->
                                     <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
                                         <span class="glyphicon glyphicon-trash"></span> Remove
                                     </button>
@@ -149,12 +153,12 @@
                                 <div class="progress-bar" role="progressbar" ng-style="{ 'width': admin.photoUploader.progress + '%' }"></div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success btn-s" ng-click="admin.photoUploader.uploadAll()" ng-disabled="!admin.photoUploader.getNotUploadedItems().length">
+<!--                         <button type="button" class="btn btn-success btn-s" ng-click="admin.photoUploader.uploadAll()" ng-disabled="!admin.photoUploader.getNotUploadedItems().length">
                             <span class="glyphicon glyphicon-upload"></span> Upload all
                         </button>
                         <button type="button" class="btn btn-warning btn-s" ng-click="admin.photoUploader.cancelAll()" ng-disabled="!admin.photoUploader.isUploading">
                             <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                        </button>
+                        </button> -->
                         <button type="button" class="btn btn-danger btn-s" ng-click="admin.photoUploader.clearQueue()" ng-disabled="!admin.photoUploader.queue.length">
                             <span class="glyphicon glyphicon-trash"></span> Remove all
                         </button>
