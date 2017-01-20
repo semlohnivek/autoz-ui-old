@@ -26,7 +26,11 @@ angular.module('autoz', [
     .state('admin', {
       url: "/admin",
       templateUrl: "views/admin.html"
-    });      	
+    })
+    .state('about', {
+      url: "/about",
+      templateUrl: "views/about.html"
+    })  	
 
 })
 

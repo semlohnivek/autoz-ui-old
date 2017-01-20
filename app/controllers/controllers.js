@@ -3,7 +3,7 @@ angular.module('autoz')
 .controller('adminCtrl', adminCtrl)
 .controller('homeCtrl', homeCtrl)
 .controller('searchCtrl', searchCtrl)
-.controller('allPhotosModalCtrl', allPhotosModalCtrl)
+.controller('aboutCtrl', aboutCtrl)
 ;
 
 function topNavCtrl() {
@@ -236,7 +236,6 @@ function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, Search, 
     vm.prices = Enum.prices;
     vm.years = Enum.years;
 
-	vm.viewPhotos = viewPhotos;
 	vm.doSearch = doSearch;
 	vm.getMake = getMake;
 	vm.clearSelectedModel = clearSelectedModel;
@@ -269,23 +268,6 @@ function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, Search, 
     }
 
 
-	function viewPhotos(car) {
-
-	    var modalInstance = $uibModal.open({
-	      animation: true,
-	      templateUrl: 'allPhotos.html',
-	      controller: 'allPhotosModalCtrl',
-	      controllerAs: 'vm',
-	      size: 'lg',
-	      resolve: {
-	        car: function () {
-	          return car;
-	        }
-	      }
-	    });
-
-	}; 
-
 	function clearSelectedModel(item, model)  {
 		vm.terms.model = undefined;
 	}
@@ -297,17 +279,8 @@ function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, Search, 
 	});	
 }
 
-function allPhotosModalCtrl($rootScope, $scope, $uibModalInstance, car, Config) {
-	var vm = this;
+function aboutCtrl() {
+	var $ctrl = this;
 
-	vm.car = car;
-	vm.photoRoot = Config.photoRoot;
-
-	  vm.cancel = function () {
-	    $uibModalInstance.dismiss('cancel');
-	  };	
-
+	$ctrl.message = "About information coming soon!!";
 }
-
-
-
