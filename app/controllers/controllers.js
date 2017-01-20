@@ -244,7 +244,7 @@ function searchCtrl($rootScope, $scope, $state, $uibModal, Makes, Cars, Search, 
 
 	vm.photoRoot = Config.photoRoot;
 
-	//vm.doSearch();	
+	vm.doSearch();	
 
     //Get vehicle makes to populate the dropdown list
 	Makes.query(function(response){
