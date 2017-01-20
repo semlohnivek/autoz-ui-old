@@ -1,0 +1,15 @@
+<div class="modal-header photo-viewer">
+	<div class="pull-left">
+		<img ng-src="{{$ctrl.photoRoot}}/{{$ctrl.car._make.logoUrl}}" class="title-item logo" style="height: 60px;">
+		<div>
+		<span ng-bind="$ctrl.car.model" class="title-item model"></span>
+	    </div>        		
+	</div>
+
+    <div class="pull-right">
+    	<div class="btn close-button" ng-click="$ctrl.cancel()"><span class="fa fa-times fa-2x"></span></div>
+    </div>
+</div>
+<div class="modal-body text-center">
+    <img class="img-responsive img-thumbnail" ng-src="{{$ctrl.photoRoot}}/{{photo}}" ng-repeat="photo in $ctrl.car.photos" style="margin-bottom: 5px;">
+</div>

@@ -1,24 +1,5 @@
 <div class="search animated fadeIn" ng-controller="searchCtrl as search">
 
-    <script type="text/ng-template" id="allPhotos.html">
-        <div class="modal-header photo-viewer">
-        	<div class="pull-left">
-				<img ng-src="{{vm.photoRoot}}/{{vm.car._make.logoUrl}}" class="title-item logo" style="height: 60px;">
-				<div>
-				<span ng-bind="vm.car.model" class="title-item model"></span>
-			    </div>        		
-        	</div>
-
-		    <div class="pull-right">
-		    	<div class="btn close-button" ng-click="vm.cancel()"><span class="fa fa-times fa-2x"></span></div>
-		    </div>
-        </div>
-        <div class="modal-body text-center">
-            <img class="img-responsive img-thumbnail" ng-src="{{vm.photoRoot}}/{{photo}}" ng-repeat="photo in vm.car.photos" style="margin-bottom: 5px;">
-        </div>
-    </script>
-
-
 		<div class="container">
 		    <div class="col-sm-12 col-md-3">
 		    	<div class="search-criteria">

@@ -4,6 +4,7 @@ angular.module('autoz')
 .service('Format', Format)
 .service('Enum', Enum)
 .service('PopupSelection', PopupSelection)
+.service('Photos', Photos)
 ;
 
 function Config() {
@@ -219,4 +220,51 @@ function PopupSelection($uibModal) {
       };      
    }
 
+}
+
+function Photos($uibModal) {
+
+  var $ctrl = this;
+
+  $ctrl.viewCarPics = viewCarPics;
+
+   function viewCarPics(car) {
+       var modalInstance = $uibModal.open({
+         animation: true,
+         templateUrl: 'views/shared/photo-viewer.html',
+         controller: modalCtrl,
+         controllerAs: '$ctrl',
+         size: 'lg',
+         resolve: {
+           car: function() {
+             return car;
+           }
+         }
+       });  
+
+       modalInstance.result.then(function (selectedItem) {
+          if (callback) {
+            callback(selectedItem);
+          }
+       }, function () {
+          //Modal dismissed
+       });           
+   }
+
+
+
+   function modalCtrl($uibModalInstance, Config, car) {
+      var $ctrl = this;
+
+      $ctrl.photoRoot = Config.photoRoot;
+      $ctrl.car = car;
+
+      $ctrl.ok = function (item) {
+        $uibModalInstance.close(item);
+      };
+
+      $ctrl.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+      };      
+   }
 }

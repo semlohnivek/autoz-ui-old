@@ -26,8 +26,6 @@ function selectionPopupInstanceCtrl() {
 
 }
 
-
-
 angular.module('autoz')
 
 .component('selectionPopup', {

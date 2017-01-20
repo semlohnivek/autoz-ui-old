@@ -47,11 +47,17 @@ function searchResultsListCtrl(Search) {
    $ctrl.res = Search.results;
 }
 
-function searchResultsItemCtrl(Config) {
+function searchResultsItemCtrl(Config, Photos) {
    var $ctrl = this;
 
    $ctrl.photoIndex = 0;
    $ctrl.photoRoot = Config.photoRoot;
+
+   $ctrl.viewCarPics = viewCarPics;
+
+   function viewCarPics() {
+      Photos.viewCarPics($ctrl.car);
+   }
 }
 
 angular.module('autoz')
