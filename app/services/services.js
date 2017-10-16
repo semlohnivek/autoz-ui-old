@@ -10,8 +10,8 @@ angular.module('autoz')
 function Config() {
    // this.apiRoot = 'http://webhost2:9001/api';
    // this.photoRoot = 'http://webhost2:9001';
-   this.apiRoot = 'http://67.166.5.46:9001/api';
-   this.photoRoot = 'http://67.166.5.46:9001';
+   this.apiRoot = 'http://71.56.233.210:9001/api';
+   this.photoRoot = 'http://71.56.233.210:9001';
 }
 
 
